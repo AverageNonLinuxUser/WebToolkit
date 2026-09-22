@@ -29,6 +29,17 @@ body {
   max-width: 480px;
 }
 
+.back {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--brass);
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.back:hover { text-decoration: underline; }
+
 h1 {
   font-size: 1.7rem;
   font-weight: 400;
