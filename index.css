@@ -52,6 +52,11 @@ a.btn.secondary {
   color: #fff;
   margin-top: 20px;
 }
+a.btn.tertiary {
+  background: #c9a86a;
+  color: #1a1408;
+  margin-top: 20px;
+}
 .tool-desc {
   font-size: 13px;
   margin: 8px 0 0;

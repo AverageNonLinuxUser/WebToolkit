@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>File Encryptor</title>
+<link rel="stylesheet" href="file-encryptor.css">
+</head>
+<body>
+<div class="sheet">
+  <a class="back" href="../index.html">← all tools</a>
+  <h1>File Encryptor</h1>
+  <p class="sub">one file + one password → encrypted file, in your browser</p>
+
+  <div class="tabs" role="tablist">
+    <button id="tabEncrypt" class="tab active" role="tab">Encrypt</button>
+    <button id="tabDecrypt" class="tab" role="tab">Decrypt</button>
+  </div>
+
+  <!-- ENCRYPT -->
+  <div id="paneEncrypt">
+    <div class="card">
+      <div class="drop" id="encDrop">
+        <p>Drop a file here, or tap to choose</p>
+        <div class="hint">only one file · nothing leaves this page</div>
+      </div>
+      <input type="file" id="encFileInput">
+      <ul id="encFilelist"></ul>
+    </div>
+
+    <div class="card">
+      <label class="field-label">PASSWORD</label>
+      <input type="password" id="encPassword" placeholder="choose a password" autocomplete="new-password">
+
+      <label class="field-label">CONFIRM PASSWORD</label>
+      <input type="password" id="encPassword2" placeholder="repeat password" autocomplete="new-password">
+
+      <button id="encryptBtn" disabled>Choose a file to continue</button>
+      <div class="status" id="encStatus"></div>
+      <a id="encDl" download>Download encrypted file</a>
+    </div>
+  </div>
+
+  <!-- DECRYPT -->
+  <div id="paneDecrypt" hidden>
+    <div class="card">
+      <div class="drop" id="decDrop">
+        <p>Drop a <b>.enc</b> file here, or tap to choose</p>
+        <div class="hint">file created with this tool</div>
+      </div>
+      <input type="file" id="decFileInput" accept=".enc">
+      <ul id="decFilelist"></ul>
+    </div>
+
+    <div class="card">
+      <label class="field-label">PASSWORD</label>
+      <input type="password" id="decPassword" placeholder="password used for encryption" autocomplete="current-password">
+
+      <button id="decryptBtn" disabled>Choose a file to continue</button>
+      <div class="status" id="decStatus"></div>
+      <a id="decDl" download>Download decrypted file</a>
+    </div>
+  </div>
+
+  <p class="note">AES-256-GCM via WebCrypto (PBKDF2-SHA256, 200,000 iterations). No upload, no account. Wrong password or damaged file fails to decrypt. Forgetting the password means the file is unrecoverable — there is no reset.</p>
+</div>
+
+<script src="file-encryptor.js"></script>
+</body>
+</html>
