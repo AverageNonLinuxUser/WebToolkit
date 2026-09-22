@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Locked Archive</title>
+<script src="https://cdn.jsdelivr.net/npm/@zip.js/zip.js@2.7.34/dist/zip.min.js"></script>
+<link rel="stylesheet" href="locked-archive.css">
+</head>
+<body>
+<div class="sheet">
+  <h1>Locked Archive</h1>
+  <p class="sub">password-protected .zip, built in your browser</p>
+
+  <div class="card">
+    <div class="drop" id="drop">
+      <p>Drop files here, or tap to choose</p>
+      <div class="hint">nothing leaves this page</div>
+    </div>
+    <input type="file" id="fileInput" multiple>
+    <ul id="filelist"></ul>
+  </div>
+
+  <div class="card">
+    <label class="field-label">PASSWORD</label>
+    <input type="password" id="password" placeholder="choose a password" autocomplete="new-password">
+
+    <div class="row">
+      <div>
+        <label class="field-label">CONFIRM</label>
+        <input type="password" id="password2" placeholder="repeat password" autocomplete="new-password">
+      </div>
+      <div>
+        <label class="field-label">STRENGTH</label>
+        <select class="strength-select" id="strength">
+          <option value="1">AES-128</option>
+          <option value="2">AES-192</option>
+          <option value="3" selected>AES-256</option>
+        </select>
+      </div>
+    </div>
+
+    <label class="field-label">ARCHIVE NAME</label>
+    <input type="text" id="archiveName" value="archive.zip">
+
+    <button id="lockBtn" disabled>Add files to continue</button>
+    <div class="progress-track" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="status" id="status"></div>
+    <a id="dl" download>Download encrypted .zip</a>
+  </div>
+
+  <p class="note">Uses AES encryption via zip.js. The resulting file opens in standard tools (7-Zip, WinZip, macOS Archive Utility) with the password you set. Forgetting the password means the contents are unrecoverable — there is no reset.</p>
+</div>
+
+<script src="locked-archive.js"></script>
+</body>
+</html>

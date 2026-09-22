@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0f1115" />
+<meta name="description" content="Combine multiple images vertically or horizontally. Mobile friendly." />
+<meta name="mobile-web-app-capable" content="yes" />
+<title>Image Stitcher — Combine Images</title>
+<link rel="stylesheet" href="image-stitcher.css" />
+</head>
+<body>
+
+<header>
+  <h1>🧩 Image <span>Stitcher</span></h1>
+  <p>Upload multiple images → drag to reorder → stack vertically or horizontally → name &amp; download.</p>
+</header>
+
+<main>
+  <!-- LEFT: controls -->
+  <section class="card">
+    <h2>1 · Add images</h2>
+    <div id="dropzone" role="button" tabindex="0" aria-label="Add images">
+      <strong>📥 Tap here or drop images</strong>
+      <small>PNG, JPG, GIF, WebP — multiple files supported</small>
+    </div>
+    <input id="fileInput" type="file" accept="image/*" multiple />
+
+    <div style="height:10px"></div>
+    <div class="row">
+      <button class="btn" id="addBtn">Browse files</button>
+      <button class="btn ghost" id="clearBtn">Clear all</button>
+    </div>
+
+    <h2 style="margin-top:18px">2 · Arrange</h2>
+    <div class="segmented" role="tablist">
+      <button id="btnVertical" class="active">⬍ Vertical</button>
+      <button id="btnHorizontal">⬌ Horizontal</button>
+    </div>
+    <p class="hint">👆 On phone: drag the <b>⠿ handle</b>, or use <b>▲ ▼</b> to move. On desktop you can also drag the whole row. Order = top→bottom (vertical) or left→right (horizontal).</p>
+    <div id="thumbList"></div>
+
+    <h2 style="margin-top:18px">3 · Style &amp; export</h2>
+    <label class="field">Gap between images: <span id="gapVal">10</span>px</label>
+    <input type="range" id="gap" min="0" max="100" value="10" />
+
+    <div class="row" style="margin-top:8px">
+      <div>
+        <label class="field">Background</label>
+        <input type="color" id="bg" value="#ffffff" />
+      </div>
+      <div>
+        <label class="field">Format</label>
+        <select id="format">
+          <option value="image/png">PNG</option>
+          <option value="image/jpeg">JPEG</option>
+          <option value="image/webp">WebP</option>
+        </select>
+      </div>
+    </div>
+
+    <label class="check"><input type="checkbox" id="normalize" checked /> Resize to same width / height (clean seam)</label>
+
+    <label class="field" for="filename">File name</label>
+    <div class="footer-actions" style="margin-top:4px">
+      <input type="text" id="filename" value="combined-image" placeholder="combined-image" autocomplete="off" enterkeyhint="done" maxlength="100" />
+      <button class="btn success" id="downloadBtn" disabled>⬇ Download</button>
+    </div>
+    <button class="btn" id="shareBtn">📤 Share…</button>
+    <p class="warn" id="scaleWarn"></p>
+  </section>
+
+  <!-- RIGHT: preview -->
+  <section class="card">
+    <h2>Live preview</h2>
+    <div class="preview-wrap">
+      <p id="emptyMsg">No images yet.<br />Add 2+ images to see the combined result here.</p>
+      <canvas id="preview" style="display:none"></canvas>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="statCount">0</b><span>images</span></div>
+      <div class="stat"><b id="statSize">—</b><span>output size</span></div>
+      <div class="stat"><b id="statMode">Vertical</b><span>direction</span></div>
+    </div>
+  </section>
+</main>
+
+<script src="image-stitcher.js"></script>
+</body>
+</html>
