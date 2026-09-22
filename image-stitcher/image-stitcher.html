@@ -6,6 +6,12 @@
 <meta name="theme-color" content="#0f1115" />
 <meta name="description" content="Combine multiple images vertically or horizontally. Mobile friendly." />
 <meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Image Stitcher" />
+<link rel="manifest" href="../manifest.webmanifest" />
+<link rel="icon" type="image/svg+xml" href="../icons/icon.svg" />
+<link rel="apple-touch-icon" href="../icons/icon-192.png" />
 <title>Image Stitcher — Combine Images</title>
 <link rel="stylesheet" href="image-stitcher.css" />
 </head>
@@ -86,5 +92,10 @@
 </main>
 
 <script src="image-stitcher.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('../sw.js'); });
+}
+</script>
 </body>
 </html>
