@@ -73,6 +73,8 @@ lockBtn.addEventListener('click', async () => {
   const pw = document.getElementById('password').value;
   const pw2 = document.getElementById('password2').value;
   const strength = parseInt(document.getElementById('strength').value, 10);
+  const compRaw = parseInt(document.getElementById('compression').value, 10);
+  const compLevel = Number.isFinite(compRaw) ? Math.min(9, Math.max(0, compRaw)) : 6;
   let archiveName = document.getElementById('archiveName').value.trim() || 'archive.zip';
   if (!archiveName.toLowerCase().endsWith('.zip')) archiveName += '.zip';
 
@@ -96,12 +98,13 @@ lockBtn.addEventListener('click', async () => {
     const zipWriter = new zip.ZipWriter(new zip.BlobWriter('application/zip'), {
       password: pw,
       encryptionStrength: strength,
-      zipCrypto: false
+      zipCrypto: false,
+      level: compLevel
     });
 
     let done = 0;
     for (const file of files) {
-      await zipWriter.add(file.name, new zip.BlobReader(file));
+      await zipWriter.add(file.name, new zip.BlobReader(file), { level: compLevel });
       done++;
       progressFill.style.width = Math.round((done / files.length) * 100) + '%';
     }
@@ -112,7 +115,7 @@ lockBtn.addEventListener('click', async () => {
     dlEl.download = archiveName;
     dlEl.textContent = `Download ${archiveName} (${humanSize(blob.size)})`;
     dlEl.classList.add('show');
-    statusEl.textContent = 'Done. The zip is encrypted with your password.';
+    statusEl.textContent = 'Done. Open it with 7-Zip (or WinZip/PeaZip) and your password — Windows Explorer cannot open AES-encrypted zips.';
   } catch (err) {
     statusEl.className = 'status err';
     statusEl.textContent = 'Something went wrong: ' + err.message;

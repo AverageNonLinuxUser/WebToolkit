@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f2ede4" />
+<meta name="theme-color" content="#0c0d1e" />
 <meta name="description" content="Locked Archive — password-protected .zip, built in your browser." />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -14,6 +14,9 @@
 <link rel="apple-touch-icon" href="../icons/icon-192.png" />
 <title>Locked Archive</title>
 <script src="https://cdn.jsdelivr.net/npm/@zip.js/zip.js@2.7.34/dist/zip.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="locked-archive.css">
 </head>
 <body>
@@ -50,8 +53,21 @@
       </div>
     </div>
 
-    <label class="field-label">ARCHIVE NAME</label>
-    <input type="text" id="archiveName" value="archive.zip">
+  <div class="row">
+    <div>
+      <label class="field-label">ARCHIVE NAME</label>
+      <input type="text" id="archiveName" value="archive.zip">
+    </div>
+    <div>
+      <label class="field-label">COMPRESSION</label>
+      <select class="strength-select" id="compression">
+        <option value="0">0 - None (Store)</option>
+        <option value="1">1 - Fastest</option>
+        <option value="5" selected>5 - Standard</option>
+        <option value="9">9 - Maximum</option>
+      </select>
+    </div>
+  </div>
 
     <button id="lockBtn" disabled>Add files to continue</button>
     <div class="progress-track" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
@@ -59,7 +75,7 @@
     <a id="dl" download>Download encrypted .zip</a>
   </div>
 
-  <p class="note">Uses AES encryption via zip.js. The resulting file opens in standard tools (7-Zip, WinZip, macOS Archive Utility) with the password you set. Forgetting the password means the contents are unrecoverable — there is no reset.</p>
+  <p class="note">Uses AES encryption via zip.js. Open the file with 7-Zip or PeaZip (free) on Windows/Linux, or Keka / `unzip -P` on macOS — Windows File Explorer and macOS Archive Utility cannot open AES-encrypted zips. Forgetting the password means the contents are unrecoverable — there is no reset.</p>
 </div>
 
 <script src="locked-archive.js"></script>
