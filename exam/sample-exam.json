@@ -1,0 +1,61 @@
+{
+  "examTitle": "AWS Certified Solutions Architect Practice",
+  "version": "1.0",
+  "defaultTimeLimitMinutes": 60,
+  "topics": [
+    {
+      "id": "topic_cloud_concepts",
+      "name": "Cloud Concepts & Fundamentals",
+      "defaultQuestionCount": 3,
+      "questions": [
+        {
+          "id": "q101",
+          "question": "Which AWS service is best suited for storing static web assets?",
+          "options": ["Amazon S3", "Amazon EC2", "Amazon RDS", "Amazon DynamoDB"],
+          "correctOptionIndex": 0,
+          "explanation": "Amazon S3 is object storage, ideal for static web hosting."
+        },
+        {
+          "id": "q102",
+          "question": "Which pricing model lets you pay only for what you use with no upfront commitment?",
+          "options": ["Reserved Instances", "On-Demand", "Dedicated Hosts", "Spot block"],
+          "correctOptionIndex": 1,
+          "explanation": "On-Demand has no commitment and bills per second/minute of use."
+        },
+        {
+          "id": "q103",
+          "question": "Which AWS global infrastructure component is an isolated data center location?",
+          "options": ["Region", "Availability Zone", "Edge Location", "Local Zone group"],
+          "correctOptionIndex": 1,
+          "explanation": "An Availability Zone is one or more discrete data centers within a Region."
+        }
+      ]
+    },
+    {
+      "id": "topic_security",
+      "name": "Security & Compliance",
+      "defaultQuestionCount": 3,
+      "questions": [
+        {
+          "id": "q201",
+          "question": "Which service centrally manages access permissions for AWS resources?",
+          "options": ["AWS IAM", "Amazon GuardDuty", "AWS Shield", "AWS KMS"],
+          "correctOptionIndex": 0,
+          "explanation": "IAM controls authentication and authorization for users, groups and roles."
+        },
+        {
+          "id": "q202",
+          "question": "Which service provides DDoS protection for applications on AWS?",
+          "options": ["AWS WAF", "AWS Shield", "Amazon Inspector", "AWS Macie"],
+          "correctOptionIndex": 1,
+          "explanation": "AWS Shield (Standard/Advanced) protects against DDoS attacks."
+        },
+        {
+          "id": "q203",
+          "type": "written",
+          "question": "Explain in 3-5 sentences how IAM policies, roles, and the principle of least privilege work together to secure AWS workloads."
+        }
+      ]
+    }
+  ]
+}

@@ -158,6 +158,16 @@ a.btn.tertiary {
 }
 a.btn.tertiary::before { display: none; }
 a.btn.tertiary:hover { border-color: rgba(242, 166, 222, 0.45); box-shadow: 0 12px 40px -10px rgba(162, 178, 247, 0.3); }
+a.btn.quaternary {
+  background: var(--panel);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(137, 207, 240, 0.35);
+  color: var(--text);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+a.btn.quaternary::before { display: none; }
+a.btn.quaternary:hover { border-color: var(--celestial); box-shadow: 0 12px 40px -10px rgba(137, 207, 240, 0.35); }
 a.btn:active { transform: scale(0.98); }
 .byline {
   color: var(--muted);

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Select Exam — Local Practice Exam App</title>
+<meta name="theme-color" content="#0c0d1e" />
+<meta name="description" content="Practice exams with timer, scoring and history — runs entirely in your browser." />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Practice Exam" />
+<link rel="manifest" href="../manifest.webmanifest" />
+<link rel="icon" type="image/svg+xml" href="../icons/icon.svg" />
+<link rel="apple-touch-icon" href="../icons/icon-192.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<header class="app-header">
+  <div class="brand">📝 Local Exam <span>Practice</span></div>
+  <nav id="main-nav">
+    <a href="index.html" data-page="select" class="nav-btn active">Select Exam</a>
+    <a href="history.html" data-page="history" class="nav-btn">Score History</a>
+    <a href="../index.html" class="nav-btn toolkit">← Toolkit</a>
+  </nav>
+</header>
+
+<main id="app">
+  <div class="grid-2">
+    <div class="card">
+      <h2>1. Exam File</h2>
+      <div id="dropzone" class="dropzone">
+        <p><strong>Drop .json exam file here</strong> or click to browse</p>
+        <input type="file" id="file-input" accept=".json,application/json" hidden />
+        <small>Schema: examTitle, topics[].questions[] — MCQ (options, correctOptionIndex, explanation) or written (type:"written", question only — no answer key)</small>
+      </div>
+      <label class="field-label">Saved exams</label>
+      <div class="row">
+        <select id="saved-exams"></select>
+        <button id="btn-delete-exam" class="btn danger ghost" title="Delete selected exam">Delete</button>
+      </div>
+      <div class="row">
+        <button id="btn-load-sample" class="btn ghost">Load sample exam</button>
+        <button id="btn-export-history" class="btn ghost">Export history JSON</button>
+        <label class="btn ghost file-label">Import history
+          <input type="file" id="history-import" accept=".json" hidden />
+        </label>
+      </div>
+      <p id="exam-meta" class="muted"></p>
+    </div>
+
+    <div class="card">
+      <h2>2. Mode & Timer</h2>
+      <div class="segmented" id="mode-selector">
+        <button data-mode="timed" class="active">Timed Exam</button>
+        <button data-mode="practice">Practice Mode</button>
+      </div>
+      <p class="muted small" id="mode-help">Timed: strict timer, results at submission. Practice: instant check + explanations.</p>
+      <div class="row">
+        <label class="field-label">Time limit (minutes)
+          <input type="number" id="time-limit" min="1" max="600" value="60" />
+        </label>
+        <label class="field-label">Pass %
+          <input type="number" id="pass-pct" min="1" max="100" value="70" />
+        </label>
+        <label class="field-label checkbox"><input type="checkbox" id="shuffle-q" checked /> Shuffle questions</label>
+        <label class="field-label checkbox"><input type="checkbox" id="shuffle-o" /> Shuffle options</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>3. Topics & Question Counts</h2>
+    <table class="topic-table">
+      <thead><tr><th></th><th>Topic</th><th>Available</th><th>Use</th></tr></thead>
+      <tbody id="topic-rows"></tbody>
+    </table>
+    <div class="row space-between">
+      <p id="total-selected" class="muted"></p>
+      <button id="btn-start" class="btn primary big" disabled>Start Exam →</button>
+    </div>
+  </div>
+</main>
+
+<footer class="muted small center">Single-user local app · data stored in browser localStorage · no server needed</footer>
+<script type="module" src="js/dashboard.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('../sw.js'); });
+}
+</script>
+</body>
+</html>

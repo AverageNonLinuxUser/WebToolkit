@@ -1,5 +1,5 @@
 // WebToolkit service worker — offline app shell + runtime cache for the zip.js CDN.
-const CACHE = 'webtoolkit-v1';
+const CACHE = 'webtoolkit-v2';
 const SHELL = [
   './',
   './index.html',
@@ -14,6 +14,20 @@ const SHELL = [
   './file-encryptor/file-encryptor.html',
   './file-encryptor/file-encryptor.css',
   './file-encryptor/file-encryptor.js',
+  './exam/index.html',
+  './exam/exam.html',
+  './exam/history.html',
+  './exam/results.html',
+  './exam/css/styles.css',
+  './exam/js/active.js',
+  './exam/js/common.js',
+  './exam/js/dashboard.js',
+  './exam/js/engine.js',
+  './exam/js/exam.js',
+  './exam/js/history.js',
+  './exam/js/results.js',
+  './exam/js/storage.js',
+  './exam/sample-exam.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/maskable-512.png',

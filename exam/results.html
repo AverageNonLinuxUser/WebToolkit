@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Results — Local Practice Exam App</title>
+<meta name="theme-color" content="#0c0d1e" />
+<meta name="description" content="Practice exams with timer, scoring and history — runs entirely in your browser." />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Practice Exam" />
+<link rel="manifest" href="../manifest.webmanifest" />
+<link rel="icon" type="image/svg+xml" href="../icons/icon.svg" />
+<link rel="apple-touch-icon" href="../icons/icon-192.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<header class="app-header">
+  <div class="brand">📝 Local Exam <span>Practice</span></div>
+  <nav id="main-nav">
+    <a href="index.html" data-page="select" class="nav-btn">Select Exam</a>
+    <a href="history.html" data-page="history" class="nav-btn">Score History</a>
+    <a href="../index.html" class="nav-btn toolkit">← Toolkit</a>
+  </nav>
+</header>
+
+<main id="app">
+  <div id="score-hero" class="card hero"></div>
+  <div class="card">
+    <h2>✍️ Written Answers — LLM Grading</h2>
+    <p class="muted small">Written answers are <b>not auto-scored</b>. Download the answer sheet and paste it into any LLM (ChatGPT, Claude, Gemini…) to have your written answers evaluated.</p>
+    <div class="row">
+      <button id="btn-answer-sheet" class="btn primary">⬇ Download Answer Sheet (.md)</button>
+      <button id="btn-copy-prompt" class="btn ghost">📋 Copy for LLM</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Topic Breakdown</h2>
+    <div id="topic-breakdown"></div>
+  </div>
+  <div class="row">
+    <button id="btn-retry-missed" class="btn primary">Retry Missed Only</button>
+    <button id="btn-review" class="btn ghost">Review Full Attempt</button>
+    <a href="index.html" class="btn ghost">Back to Select Exam</a>
+  </div>
+  <div id="review-list" class="card hidden"><h2>Review</h2><div id="review-items"></div></div>
+</main>
+
+<footer class="muted small center">Single-user local app · data stored in browser localStorage · no server needed</footer>
+<script type="module" src="js/results.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('../sw.js'); });
+}
+</script>
+</body>
+</html>

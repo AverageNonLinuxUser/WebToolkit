@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Score History — Local Practice Exam App</title>
+<meta name="theme-color" content="#0c0d1e" />
+<meta name="description" content="Practice exams with timer, scoring and history — runs entirely in your browser." />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Practice Exam" />
+<link rel="manifest" href="../manifest.webmanifest" />
+<link rel="icon" type="image/svg+xml" href="../icons/icon.svg" />
+<link rel="apple-touch-icon" href="../icons/icon-192.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<header class="app-header">
+  <div class="brand">📝 Local Exam <span>Practice</span></div>
+  <nav id="main-nav">
+    <a href="index.html" data-page="select" class="nav-btn">Select Exam</a>
+    <a href="history.html" data-page="history" class="nav-btn active">Score History</a>
+    <a href="../index.html" class="nav-btn toolkit">← Toolkit</a>
+  </nav>
+</header>
+
+<main id="app">
+  <div class="grid-3" id="history-stats"></div>
+  <div class="card">
+    <h2>Attempts</h2>
+    <canvas id="trend-chart" width="800" height="220"></canvas>
+    <table class="topic-table"><thead><tr><th>Date</th><th>Exam</th><th>Mode</th><th>Score</th><th>Time</th><th></th></tr></thead>
+    <tbody id="history-rows"></tbody></table>
+  </div>
+  <div class="card">
+    <h2>🎯 Focus List — Most-Missed Questions</h2>
+    <p class="muted small">Aggregated across attempts for the selected exam, sorted by times missed. Written questions are never scored, so only multiple-choice appears here.</p>
+    <div class="row">
+      <label class="field-label">Exam
+        <select id="focus-exam"></select>
+      </label>
+    </div>
+    <div id="focus-list"></div>
+  </div>
+  <div class="row">
+    <a href="index.html" class="btn ghost">← Back to Select Exam</a>
+  </div>
+</main>
+
+<footer class="muted small center">Single-user local app · data stored in browser localStorage · no server needed</footer>
+<script type="module" src="js/history.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('../sw.js'); });
+}
+</script>
+</body>
+</html>
