@@ -10,6 +10,7 @@ const gapVal = document.getElementById('gapVal');
 const bgInput = document.getElementById('bg');
 const formatInput = document.getElementById('format');
 const normalizeInput = document.getElementById('normalize');
+const allowFullResInput = document.getElementById('allowFullRes');
 const filenameInput = document.getElementById('filename');
 const downloadBtn = document.getElementById('downloadBtn');
 const shareBtn = document.getElementById('shareBtn');
@@ -77,6 +78,7 @@ function setDirection(d) {
 gapInput.oninput = () => { gapVal.textContent = gapInput.value; renderPreview(); };
 bgInput.oninput = renderPreview;
 normalizeInput.onchange = renderPreview;
+allowFullResInput.onchange = renderPreview;
 formatInput.onchange = renderPreview;
 
 function moveItem(id, delta) {
@@ -210,6 +212,8 @@ function escapeHtml(s) {
 // ---------- combine + preview (with mobile memory guard) ----------
 const MAX_SIDE = 4096;        // longest canvas edge cap (prevents OOM on phones)
 const MAX_PIXELS = 16000000;  // ~16MP cap, common mobile canvas safe zone
+const MAX_SIDE_FULLRES = 16384;       // most desktop browsers' hard canvas-edge limit
+const MAX_PIXELS_FULLRES = 100000000; // ~100MP, generous desktop/PC memory budget
 
 function computedSizes() {
   let gap = parseInt(gapInput.value, 10) || 0;
@@ -228,9 +232,11 @@ function computedSizes() {
     H = Math.max(...sizes.map(s => s.h));
   }
   // downscale uniformly if a phone photo combo would blow the canvas budget
+  const maxSide = allowFullResInput.checked ? MAX_SIDE_FULLRES : MAX_SIDE;
+  const maxPixels = allowFullResInput.checked ? MAX_PIXELS_FULLRES : MAX_PIXELS;
   let scale = 1;
   if (W > 0 && H > 0) {
-    scale = Math.min(1, MAX_SIDE / Math.max(W, H), Math.sqrt(MAX_PIXELS / (W * H)));
+    scale = Math.min(1, maxSide / Math.max(W, H), Math.sqrt(maxPixels / (W * H)));
   }
   if (scale < 1) {
     sizes = sizes.map(s => ({ w: Math.max(1, Math.round(s.w * scale)), h: Math.max(1, Math.round(s.h * scale)) }));
@@ -277,7 +283,8 @@ function renderPreview() {
   statSize.textContent = `${W} × ${H}px`;
   if (scale < 1) {
     scaleWarn.style.display = 'block';
-    scaleWarn.textContent = `⚠ Large photos auto-scaled to ${Math.round(scale * 100)}% to stay within mobile memory limits (${W}×${H}).`;
+    const limitLabel = allowFullResInput.checked ? 'browser canvas limits' : 'mobile memory limits';
+    scaleWarn.textContent = `⚠ Large photos auto-scaled to ${Math.round(scale * 100)}% to stay within ${limitLabel} (${W}×${H}).`;
   } else {
     scaleWarn.style.display = 'none';
   }
